@@ -21,5 +21,6 @@ pushd /tmp && \
     echo "$(TZ=UTC date +%Y%m%d-%H%M%S)_$(git rev-parse --short HEAD)_$(git branch --show-current)" > /.CONTAINER_VERSION && \
 popd && \
 apt-get remove -y git && \
-apt-get autoremove -y && \
+apt-get autoremove -q -o APT::Autoremove::RecommendsImportant=0 -o APT::Autoremove::SuggestsImportant=0 -y && \
+apt-get clean -y -q && \
 rm -rf /tmp/*
